@@ -1,2 +1,1 @@
-# seng440project
-RSA Cryptography
+# SENG 440 - RSA Cryptography Project
