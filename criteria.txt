@@ -1,0 +1,13 @@
+Goal: 
+
+- minimize the number of operations
+- implement the table of powers method rather than mongomery multiplication
+    - requires many tables to implement
+- use 16-bit integers
+- M is a 16-bit integer
+- try to estimate how many tables you need, how much memory you need, etc.
+- how many cache misses are we going to encounter? (hint: LOTS)
+- try to include many software optimization techniques (eg. pipelining, etc.)
+- define a new instruction to activate a hardware assist which stores all tables of powers
+- compare all software solution with the hardware-based solution
+- keep an eye on cache misses; too many cache misses -> try software pipelining
