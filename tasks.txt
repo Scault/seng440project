@@ -1,0 +1,39 @@
+1.  Describe algorithm in a high-level language (C). The operation that will
+    benefit from hardware/firmware support will be implemented first as a
+    routine, then as an inline routine, and finally as a macro.
+2.  You will debug the high-level implementation by compliing it on a
+    workstation. Profile-driven compliation may be needed. You will also
+    build the testbench (a set of input and output data), which beomces part
+    of the project.
+3.  You will generate ARM assembly code and estimate the performance of the
+    pure-software solution by simulation on a cycle-accurate simulator. In
+    particular, you will determine the performance for all three butterfly
+    software implementations: routine, inline routine, and macro.
+4.  You will use software optimization techniques (such as software
+    pipelining) to improve the performance.
+5.  You will optimize by hand the resulting assembly code. You will assemble
+    the code and simulate the resulting executable on the cycle-accurate
+    simulator.
+6.  Instead of calling or inlining the butterfly routine, you will
+    instantiate a butterfly operation. You will compile the code (note that
+    you will not be able to assemble it). To determine the performance (that
+    is, the latency) of the butterfly operation, you will implement it in
+    hardware and firmware.
+7.  You will implement the butterfly in firmware. As microcoded engine you
+    will use the ARM instruction set without multiplication and division.
+    You will propose two solutions for a 1-issue slot, and a 2-issue slot
+    microcoded engine,  respectively. You will determine the computing
+    performance for both solutions (that is, you will count the number of
+    cycles by hand, since you do not have access to a simulator for the
+    microcoded engine).
+8.  You will implement the butterfly in hardware. An automaton will be
+    designed. Automaton description in VHDL (or Verilog) is required. You
+    will also create the testbench (which will also be written in VHDL). To
+    determine the butterfly latency, you will compile the VHDL code and
+    simulate the resulting circuit.
+9.  You will describe the computing scenario in UML and build the blue-
+    prints of the design.
+10. You will send by e-mail the C, assembly, VHDL, and UML files.
+11. You will write the report and submit it by email (pdf format).
+12. You will answer a couple of quiestions at submission time.
+   
