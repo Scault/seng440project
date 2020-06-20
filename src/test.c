@@ -30,7 +30,7 @@ void user_input()
   uint16_t decrypted_message[100];
   printf("Input a message: ");
   scanf("%s", message);
-    int i=0;
+  int i = 0;
   printf("%-15s", "Sent");
   while(1)
   {
@@ -44,7 +44,7 @@ void user_input()
     }
   }
 
-  i=0;
+  i = 0;
   printf("\n%-15s", "ASCII Dec");
   while(1)
   {
@@ -62,7 +62,7 @@ void user_input()
   print_array(encrypted_message);
   printf("\n%-15s","Decrypted");
 
-  i=0;
+  i = 0;
   while(1)
   {
     decrypted_message[i] = decrypt(encrypted_message[i]);
@@ -76,8 +76,8 @@ void user_input()
 
   print_array(decrypted_message);
   printf("\n");
-  i=0;
-  printf("%-15s", "Recived");
+  i = 0;
+  printf("%-15s", "Received");
   while(1)
   {
     printf("%-7c ", decrypted_message[i]);
@@ -104,7 +104,8 @@ int test_ASCII()
   uint16_t encrypted = 0;
   uint16_t decrypted = 0;
   int cases_passed = 0;
-  for(int i=0; i<128; i++)
+  int i;
+  for(i = 0; i<128; i++)
   {
 
     encrypted = encrypt((uint16_t)i);
@@ -174,9 +175,10 @@ int test_sanity()
 double test_encrpytion_performance()
 {
   clock_t start = clock();
-  for(int i=0;i<1000000;i++)
+  int i, j;
+  for(i = 0;i<1000000;i++)
   {
-    for(int j=3;j<128;j++)
+    for(j = 0;j<128;j++)
     {
       
       uint16_t encrypted = encrypt((uint16_t)j);
@@ -199,9 +201,10 @@ double test_encrpytion_performance()
 double test_decrpytion_performance()
 {
   clock_t start = clock();
-  for(int i=0;i<1000000;i++)
+  int i, j;
+  for(i = 0;i<1000000;i++)
   {
-    for(int j=0;j<128;j++)
+    for(j = 0;j<128;j++)
     {
       uint16_t decrypted = decrypt((uint16_t)expected_encrypted_ASCII[j]);
       if(j != (int)decrypted)
@@ -293,13 +296,12 @@ void test_performance_CVS()
   fprintf(fp, "%-10s %-10s\n", "Encryption", "Decryption");
   double encryption_performance = 0.0;
   double decryption_performance = 0.0;
-  for(int i = 0; i < 100;i++){
+  int i;
+  for(i = 0; i < 100;i++){
   encryption_performance = test_encrpytion_performance();
   decryption_performance = test_decrpytion_performance();
   fprintf(fp, "%-10f %-10f\n",encryption_performance,decryption_performance );
   } 
   
   fclose(fp);
-
-
 }

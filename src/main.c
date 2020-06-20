@@ -92,7 +92,8 @@
  */
 int find_index(uint16_t c)
 {
-  for(int i=0; i<128; i++)
+  int i;
+  for(i=0; i<128; i++)
   {
     if(decrypt_table[i][0]==(int)c)
     {

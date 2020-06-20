@@ -12,7 +12,7 @@ void test_performance_CVS();
 double test_encrpytion_performance();
 double test_decrpytion_performance();
  
-static const int expected_encrypted_ASCII[128] = {
+static const int expected_encrypted_ASCII[ASCII_TABLE_SIZE] = {
 0,
 1,
 41139,
