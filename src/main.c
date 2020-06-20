@@ -92,7 +92,7 @@
  */
 int find_index(uint16_t c)
 {
-  int i;
+  uint16_t i;
   for(i=0; i<128; i++)
   {
     if(decrypt_table[i][0]==(int)c)
@@ -115,10 +115,10 @@ int find_index(uint16_t c)
  *
  * Time complexity O(log(n)), where n=i
  */
-int binarySearch_table(const int arr[][16], int left, int right, int x) 
+int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, uint16_t x) 
 { 
     if (right >= left) { 
-        int mid = left + (right - left) / 2; 
+        uint16_t mid = left + (right - left) / 2; 
   
         if (arr[mid][0] == x) 
             return mid; 
@@ -147,11 +147,11 @@ int binarySearch_table(const int arr[][16], int left, int right, int x)
  */
 uint16_t encrypt(uint16_t T)
 {
-  int a = encrypt_table[T][0] * encrypt_table[T][3];
-  int b = a % 44923 * encrypt_table[T][6];
-  int c = b % 44923 * encrypt_table[T][9];
-  int d = c % 44923 * encrypt_table[T][14];
-  int C = d % 44923;
+  uint32_t a = encrypt_table[T][0] * encrypt_table[T][3];
+  uint32_t b = a % 44923 * encrypt_table[T][6];
+  uint32_t c = b % 44923 * encrypt_table[T][9];
+  uint32_t d = c % 44923 * encrypt_table[T][14];
+  uint32_t C = d % 44923;
   return (uint16_t)C;
 }
 
@@ -172,16 +172,16 @@ uint16_t decrypt(uint16_t C)
 {
   int index = binarySearch_table(decrypt_table, 0, ASCII_TABLE_SIZE-1, C);
 
-  int a = decrypt_table[index][3] * decrypt_table[index][5];
-  int b = a % 44923 * decrypt_table[index][6];
-  int c = b % 44923 * decrypt_table[index][7];
-  int d = c % 44923 * decrypt_table[index][8];
-  int e = d % 44923 * decrypt_table[index][11];
-  int f = e % 44923 * decrypt_table[index][12];
-  int g = f % 44923 * decrypt_table[index][14];
-  int h = g % 44923 * decrypt_table[index][15];
-  int i = h % 44923 * decrypt_table[index][0];
-  int T = i % 44923;
+  uint32_t a = decrypt_table[index][3] * decrypt_table[index][5];
+  uint32_t b = a % 44923 * decrypt_table[index][6];
+  uint32_t c = b % 44923 * decrypt_table[index][7];
+  uint32_t d = c % 44923 * decrypt_table[index][8];
+  uint32_t e = d % 44923 * decrypt_table[index][11];
+  uint32_t f = e % 44923 * decrypt_table[index][12];
+  uint32_t g = f % 44923 * decrypt_table[index][14];
+  uint32_t h = g % 44923 * decrypt_table[index][15];
+  uint32_t i = h % 44923 * decrypt_table[index][0];
+  uint32_t T = i % 44923;
   return (uint16_t)T;
 }
 
