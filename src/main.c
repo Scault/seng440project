@@ -169,7 +169,7 @@ uint16_t encrypt(uint16_t T)
  */
 uint16_t decrypt(uint16_t C)
 {
-  int index = binarySearch_table(decrypt_table, 0, DECRYPTION_TABLE_SIZE-1, C);
+  int index = binarySearch_table(decrypt_table, 0, ASCII_TABLE_SIZE-1, C);
 
   int a = decrypt_table[index][3] * decrypt_table[index][5];
   int b = a % 44923 * decrypt_table[index][6];
@@ -192,5 +192,6 @@ int main(void)
 {
   user_input();
   //test();
+  //test_performance_CVS();
   return 0;
 }
