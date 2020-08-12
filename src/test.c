@@ -176,7 +176,7 @@ double test_encrpytion_performance()
 {
   clock_t start = clock();
   int i, j;
-  for(i = 0;i<100000;i++)
+  for(i = 0;i<10000;i++)
   {
     for(j = 0;j<128;j++)
     {
@@ -202,7 +202,7 @@ double test_decrpytion_performance()
 {
   clock_t start = clock();
   int i, j;
-  for(i = 0;i<100000;i++)
+  for(i = 0;i<10000;i++)
   {
     for(j = 0;j<128;j++)
     {
