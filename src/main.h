@@ -286,7 +286,7 @@ static const int decrypt_table[ASCII_TABLE_SIZE][DECRYPTION_TABLE_ENTRY_SIZE] = 
 /* ----------------------------------------------- Function Prototypes ---------------------------------------------- */
 
 int find_index(uint16_t);
-int binarySearch_table(const int[][DECRYPTION_TABLE_ENTRY_SIZE], int, int, int) ;
+int binarySearch_table(const uint16_t [][DECRYPTION_TABLE_ENTRY_SIZE], uint16_t, uint16_t, uint16_t);
 uint16_t encrypt(uint16_t);
 uint16_t decrypt(uint16_t);
 
