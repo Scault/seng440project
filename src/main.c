@@ -191,8 +191,8 @@ uint16_t decrypt(uint16_t C)
  */
 int main(void)
 {
-  user_input();
-  //test();
-  //test_performance_CVS();
+  // user_input();
+  // test();
+  test_performance_CVS();
   return 0;
 }
