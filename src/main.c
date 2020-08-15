@@ -24,7 +24,7 @@
       T = C^D mod PQ where C=ciphertext and T=Plain text
 
   List of the first 60 primes
-	 1     2     3     4     5     6     7     8     9    10  
+	 1     2     3     4     5     6     7     8     9    10
   ---------------------------------------------------------
 	 2,    3,    5,    7,    11,   13,   17,   19,   23,   29,   // 1  - 10
    31,   37,   41,   43,   47,   53,   59,   61,   67,   71,   // 11 - 20
@@ -84,9 +84,9 @@
  *
  * int find_index(uint16_t c)
  * Inputs:  uint16_t C, Where C = Ciphertext
- * Outputs: int i,      Where i = arrary index of the row 
+ * Outputs: int i,      Where i = arrary index of the row
  *
- * Locates the index of decrypt_table[i][0] needed to compuet the power 
+ * Locates the index of decrypt_table[i][0] needed to compuet the power
  *
  * Time complexity O(n), where n=i
  */
@@ -109,41 +109,38 @@ int find_index(uint16_t c)
            - int left , where left is the lefthand boundary for the search
            - int right, where right is the righthand boundary for the search
            - int x    , where x is the value to be searched for
- * Outputs: int mid   , Where mid = arrary index of the row 
+ * Outputs: int mid   , Where mid = arrary index of the row
  *
- * Locates the index of decrypt_table[i][0] needed to compuet the power 
+ * Locates the index of decrypt_table[i][0] needed to compuet the power
  *
  * Time complexity O(log(n)), where n=i
  */
-int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, uint16_t x) 
-{ 
-    if (right >= left) { 
-        uint16_t mid = left + (right - left) / 2; 
-  
-        if (arr[mid][0] == x) 
-            return mid; 
-  
-        if (arr[mid][0] > x) 
-            return binarySearch_table(arr, left, mid - 1, x); 
-  
-        return binarySearch_table(arr, mid + 1, right, x); 
-    } 
-  
-    return -1; 
-} 
+int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, uint16_t x)
+{
+    if (right >= left)
+    {
+        uint16_t mid = left + (right - left) / 2;
+        if (arr[mid][0] == x)
+            return mid;
+        if (arr[mid][0] > x)
+            return binarySearch_table(arr, left, mid - 1, x);
+        return binarySearch_table(arr, mid + 1, right, x);
+    }
+    return -1;
+}
 
 
 /* uint16_t encrypt(uint16_t T)
- * Inputs:  uint16_t T, Where T = Plaintext 
+ * Inputs:  uint16_t T, Where T = Plaintext
  * Outputs: uint16_t C, Where C = Ciphertext
  *
  * Computes encryption of of T using the RSA formula below
- * and table method for computing expoents. 
+ * and table method for computing expoents.
  *
  * C = T^E mod PQ where C=ciphertext and T=Plain text
  *
  * E = 16969 = 0100 0010 0100 1001
- * E = 2^0 + 2^3 + 2^6 + 2^6 + 2^9 + 2^14 
+ * E = 2^0 + 2^3 + 2^6 + 2^6 + 2^9 + 2^14
  */
 uint16_t encrypt(uint16_t T)
 {
@@ -161,7 +158,7 @@ uint16_t encrypt(uint16_t T)
  * Outputs: uint16_t T, Where T = Plaintext
  *
  * Computes decryption of of C using the RSA formula below
- * and table method for computing expoents. 
+ * and table method for computing expoents.
  *
  * T = C^D mod PQ where C=ciphertext and T=Plain text
  *

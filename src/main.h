@@ -11,15 +11,15 @@
 
 static const uint16_t P = 167;    // Prime #1
 static const uint16_t Q = 269;    // Prime #2
-static const uint16_t M = 44923;  // P*Q 
+static const uint16_t M = 44923;  // P*Q
 static const uint16_t E = 16969;  // Coprime with (P-1)(Q-1) = 44488, 1 < E < 44923
-                           //  0100 0010 0100 1001
-                           //   = 1 + 8 + 64 + 512 + 16384
+                                  //  0100 0010 0100 1001
+                                  //   = 1 + 8 + 64 + 512 + 16384
 static const uint16_t D = 55785;  // (DE-1) is evenly divisible by (P-1)(Q-1) = 44488
-                           //  1101 1001 1110 1001
-                           //   = 1 + 8 + 32 + 64 + 128 + 256 + 2048 + 4096 + 16384 + 32768
+                                  //  1101 1001 1110 1001
+                                  //   = 1 + 8 + 32 + 64 + 128 + 256 + 2048 + 4096 + 16384 + 32768
 
-static const int encrypt_table[ASCII_TABLE_SIZE][ENCRYPTION_TABLE_ENTRY_SIZE] = {
+static const uint16_t encrypt_table[ASCII_TABLE_SIZE][ENCRYPTION_TABLE_ENTRY_SIZE] = {
 // 1    2      4      8      16     32     64     128    256    512    1024   2048   4096  8192    16384
   {0,   0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,    0,      0    },
   {1,   1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1    },
@@ -151,7 +151,7 @@ static const int encrypt_table[ASCII_TABLE_SIZE][ENCRYPTION_TABLE_ENTRY_SIZE] = 
   {127, 16129, 40471, 9261,  8114,  24801, 3885,  44020, 6795,  36104, 13048, 37057, 14985, 25071, 37348}
 };
 
-static const int decrypt_table[ASCII_TABLE_SIZE][DECRYPTION_TABLE_ENTRY_SIZE] = {
+static const uint16_t decrypt_table[ASCII_TABLE_SIZE][DECRYPTION_TABLE_ENTRY_SIZE] = {
 // 1      2      4      8      16     32     64     128    256    512    1024   2048   4096   8192   16384  32768
   {0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0    },
   {1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1,     1    },
