@@ -83,12 +83,12 @@
 /* !!THIS FUNCTION WAS REPLACED BY binarySearch_table()!!
  *
  * int find_index(uint16_t c)
- * Inputs:  uint16_t C, Where C = Ciphertext
- * Outputs: int i,      Where i = arrary index of the row
+ * Inputs:  uint16_t C, where C is the value to be searched for
+ * Outputs: int i,      where i is arrary index of the value
  *
  * Locates the index of decrypt_table[i][0] needed to compuet the power
  *
- * Time complexity O(n), where n=i
+ * Time complexity: O(n), where n=i
  */
 int find_index(uint16_t c)
 {
@@ -105,15 +105,15 @@ int find_index(uint16_t c)
 
 
 /* int binarySearch_table(arr[][16], left, right, x)
- * Inputs: - const int decrypt_table[][]
-           - int left , where left is the lefthand boundary for the search
-           - int right, where right is the righthand boundary for the search
-           - int x    , where x is the value to be searched for
- * Outputs: int mid   , Where mid = arrary index of the row
+ * Inputs: - const uint16_t decrypt_table[][]
+           - uint16_t left , where left is the lefthand boundary for the search
+           - uint16_t right, where right is the righthand boundary for the search
+           - uint16_t x,     where x is the value to be searched for
+ * Outputs: int mid,         where mid = arrary index of the value
  *
- * Locates the index of decrypt_table[i][0] needed to compuet the power
+ * Locates the index of decrypt_table[i][0] needed to compute the power
  *
- * Time complexity O(log(n)), where n=i
+ * Time complexity: O(log(n)), where n=i
  */
 int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, uint16_t x)
 {
@@ -131,6 +131,38 @@ int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, 
         return binarySearch_table(arr, mid + 1, right, x);
     }
     return -1;
+}
+
+/* int hashFunctionSearch(uint16_t i)
+ * Inputs:  uint16_t i, where i is the value to be searched for
+ * Outputs: int index,  where intex is the arrary index of the value
+ *
+ * Locates the index of decrypt_table[i][0] needed to compute the power
+ * by utilizing a hash function
+ *
+ * Time complexity: O(1)
+ */
+int hashFunctionSearch(uint16_t i)
+{
+    int index;
+    if(i == 5777)
+    {
+        index = 18;
+    }
+    else if(i == 5182)
+    {
+        index = 15;
+    }
+    else if(i == 25714)
+    {
+        index = 77;
+    }
+    else
+    {
+        int num = (((int)i) % 997);
+        index = gen_table[num];
+    }
+    return index;
 }
 
 
@@ -171,7 +203,7 @@ uint16_t encrypt(uint16_t T)
  */
 uint16_t decrypt(uint16_t C)
 {
-    int index = binarySearch_table(decrypt_table, 0, ASCII_TABLE_SIZE-1, C);
+    int index = hashFunctionSearch(C);
 
     uint32_t a = decrypt_table[index][3] * decrypt_table[index][5];
     uint32_t b = a % 44923 * decrypt_table[index][6];
