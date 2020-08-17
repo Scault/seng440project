@@ -26,11 +26,11 @@
   List of the first 60 primes
 	 1     2     3     4     5     6     7     8     9    10
   ---------------------------------------------------------
-	 2,    3,    5,    7,    11,   13,   17,   19,   23,   29,   // 1  - 10
-   31,   37,   41,   43,   47,   53,   59,   61,   67,   71,   // 11 - 20
-   73,   79,   83,   89,   97,   101,  103,  107,  109,  113,  // 21 - 30
-   127,  131,  137,  139,  149,  151,  157,  163,  167,  173,  // 31 - 40
-	 179,  181,  191,  193,  197,  199,  211,  223,  227,  229,  // 41 - 50
+	 2,    3,    5,    7,   11,   13,   17,   19,   23,   29,  // 1  - 10
+    31,   37,   41,   43,   47,   53,   59,   61,   67,   71,  // 11 - 20
+    73,   79,   83,   89,   97,  101,  103,  107,  109,  113,  // 21 - 30
+    27,  131,  137,  139,  149,  151,  157,  163,  167,  173,  // 31 - 40
+   179,  181,  191,  193,  197,  199,  211,  223,  227,  229,  // 41 - 50
    233,  239,  241,  251,  257,  263,  269,  271,  277,  281   // 51 - 60
 
   ASCII CHAR to DEC
@@ -90,6 +90,7 @@
  *
  * Time complexity: O(n), where n=i
  */
+/*
 int find_index(uint16_t c)
 {
     uint16_t i;
@@ -103,7 +104,7 @@ int find_index(uint16_t c)
     return -1;
 }
 
-
+*/
 /* int binarySearch_table(arr[][16], left, right, x)
  * Inputs: - const uint16_t decrypt_table[][]
            - uint16_t left , where left is the lefthand boundary for the search
@@ -115,7 +116,11 @@ int find_index(uint16_t c)
  *
  * Time complexity: O(log(n)), where n=i
  */
-int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, uint16_t x)
+/*
+int binarySearch_table(const uint16_t arr[][16],
+                       uint16_t left,
+                       uint16_t right,
+                       uint16_t x)
 {
     if(right >= left)
     {
@@ -132,7 +137,7 @@ int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, 
     }
     return -1;
 }
-
+*/
 /* int hashFunctionSearch(uint16_t i)
  * Inputs:  uint16_t i, where i is the value to be searched for
  * Outputs: int index,  where intex is the arrary index of the value
@@ -142,6 +147,7 @@ int binarySearch_table(const uint16_t arr[][16], uint16_t left, uint16_t right, 
  *
  * Time complexity: O(1)
  */
+/*
 int hashFunctionSearch(uint16_t i)
 {
     int index;
@@ -165,13 +171,13 @@ int hashFunctionSearch(uint16_t i)
     return index;
 }
 
-
+*/
 /* uint16_t encrypt(uint16_t T)
  * Inputs:  uint16_t T, Where T = Plaintext
  * Outputs: uint16_t C, Where C = Ciphertext
  *
  * Computes encryption of of T using the RSA formula below
- * and table method for computing expoents.
+ * and table method for computing exponents.
  *
  * C = T^E mod PQ where C=ciphertext and T=Plain text
  *
@@ -180,11 +186,11 @@ int hashFunctionSearch(uint16_t i)
  */
 uint16_t encrypt(uint16_t T)
 {
-    uint32_t a = encrypt_table[T][0] * encrypt_table[T][3];
-    uint32_t b = a % 44923 * encrypt_table[T][6];
-    uint32_t c = b % 44923 * encrypt_table[T][9];
-    uint32_t d = c % 44923 * encrypt_table[T][14];
-    uint32_t C = d % 44923;
+    register uint32_t a = T     * encrypt_table[T][3];
+    register uint32_t b = a % 44923 * encrypt_table[T][6];
+    register uint32_t c = b % 44923 * encrypt_table[T][9];
+    register uint32_t d = c % 44923 * encrypt_table[T][14];
+    register uint32_t C = d % 44923;
     return (uint16_t)C;
 }
 
@@ -194,7 +200,7 @@ uint16_t encrypt(uint16_t T)
  * Outputs: uint16_t T, Where T = Plaintext
  *
  * Computes decryption of of C using the RSA formula below
- * and table method for computing expoents.
+ * and table method for computing exponents.
  *
  * T = C^D mod PQ where C=ciphertext and T=Plain text
  *
@@ -203,18 +209,37 @@ uint16_t encrypt(uint16_t T)
  */
 uint16_t decrypt(uint16_t C)
 {
-    int index = hashFunctionSearch(C);
-
-    uint32_t a = decrypt_table[index][3] * decrypt_table[index][5];
-    uint32_t b = a % 44923 * decrypt_table[index][6];
-    uint32_t c = b % 44923 * decrypt_table[index][7];
-    uint32_t d = c % 44923 * decrypt_table[index][8];
-    uint32_t e = d % 44923 * decrypt_table[index][11];
-    uint32_t f = e % 44923 * decrypt_table[index][12];
-    uint32_t g = f % 44923 * decrypt_table[index][14];
-    uint32_t h = g % 44923 * decrypt_table[index][15];
-    uint32_t i = h % 44923 * decrypt_table[index][0];
-    uint32_t T = i % 44923;
+    int index;
+    if(C > 25714)
+    {
+        goto skip;
+    }
+    if(C == 5777)
+    {
+        index = 18;
+    }
+    else if(C == 5182)
+    {
+        index = 15;
+    }
+    else if(C == 25714)
+    {
+        index = 77;
+    }
+    else
+    {
+     skip:index = gen_table[(((int)C) % 997)];
+    }
+    register uint32_t a = decrypt_table[index][3] * decrypt_table[index][5];
+    register uint32_t b = a % 44923 * decrypt_table[index][6];
+    register uint32_t c = b % 44923 * decrypt_table[index][7];
+    register uint32_t d = c % 44923 * decrypt_table[index][8];
+    register uint32_t e = d % 44923 * decrypt_table[index][11];
+    register uint32_t f = e % 44923 * decrypt_table[index][12];
+    register uint32_t g = f % 44923 * decrypt_table[index][14];
+    register uint32_t h = g % 44923 * decrypt_table[index][15];
+    register uint32_t i = h % 44923 * decrypt_table[index][0];
+    register uint32_t T = i % 44923;
     return (uint16_t)T;
 }
 
